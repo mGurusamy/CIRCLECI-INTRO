@@ -4,7 +4,7 @@
   "description": "Introduction about circleci - ci tooling",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "Needs to setup test suites!!!"
   },
   "author": "",
   "license": "ISC"
