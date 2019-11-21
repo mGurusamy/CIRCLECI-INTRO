@@ -4,7 +4,7 @@
   "description": "Introduction about circleci - ci tooling",
   "main": "index.js",
   "scripts": {
-    "test": "Needs to setup test suites!!!"
+    "test": "echo npm test temporarily disbaled. This has to be looked after once we setup the pipe line!!!"
   },
   "author": "",
   "license": "ISC"
