@@ -36,6 +36,13 @@ jobs:
       - attach_workspace:
           at: ~/repo/workspace
       - run: ls ~/repo/workspace/artifact.txt
+  
+  test-environment:
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/repo
+    steps:
+      - run: echo test-environment step
 
 workflows:
   version: 2
@@ -51,5 +58,12 @@ workflows:
           filters:
             branches:
               only:
+                - master
+      - test-environment:
+          requires:
+            - test
+          filters:
+            branch:
+              ignore:
                 - master
            
