@@ -11,10 +11,10 @@ jobs:
     working_directory: ~/repo
     steps:
       - run: echo build step
-      - run: mkdir build-frontend_output
-      - run: touch build-frontend_output/artifact.txt
+      - run: mkdir build-output
+      - run: touch build-output/artifact.txt
       - persist_to_workspace:
-          root: buil-frontend_output
+          root: build-output
           paths:
             - '*'
   test:
