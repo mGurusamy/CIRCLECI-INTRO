@@ -59,11 +59,11 @@ workflows:
             branches:
               only:
                 - master
-      - test-environment:
-          requires:
-            - test
-          filters:
-            branch:
-              ignore:
-                - master
+      # - test-environment:
+      #     requires:
+      #       - test
+      #     filters:
+      #       branch:
+      #         ignore:
+      #           - master
            
