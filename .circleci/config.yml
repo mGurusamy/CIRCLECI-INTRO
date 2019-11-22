@@ -5,40 +5,27 @@
 
 version: 2
 jobs:
-  build-frontend:
+  build:
     docker:
       - image: circleci/node:latest
     working_directory: ~/repo
     steps:
-      - run: echo build-frontend step
-  
-  build-backend:
+      - run: echo build step
+      - run: mkdir build-frontend_output
+      - run: touch build-frontend_output/artifact.txt
+      - persist_to_workspace:
+          root: buil-frontend_output
+          paths:
+            - '*'
+  test:
     docker:
       - image: circleci/node:latest
     working_directory: ~/repo
     steps:
-      - run: echo build-backend step
-
-  test-frontend:
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/repo
-    steps:
-      - run: echo test-frontend step
-  
-  test-backend:
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/repo
-    steps:
-      - run: echo test-backend step
-
-  integration-tests:
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/repo
-    steps:
-      - run: echo integration-tests step
+      - run: echo test step
+      - attach_workspace:
+          at: ~/repo/workspace
+      - run: ls ~/repo/workspace/artifact.txt
 
   deploy:
     docker:
@@ -46,25 +33,17 @@ jobs:
     working_directory: ~/repo
     steps:
       - run: echo deploy step
+      - run: ls ~/repo/workspace/artifact.txt
 
 workflows:
   version: 2
   build-and-test:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
+      - build
+      - test:
           requires:
-            - build-frontend
-      - test-backend:
-          requires:
-            - build-backend
-      - integration-tests:
-          requires:
-            - build-frontend
-            - build-backend
+            - build
       - deploy:
           requires:
-            - test-frontend
-            - test-backend
-            - integration-tests 
+            - test
+           
